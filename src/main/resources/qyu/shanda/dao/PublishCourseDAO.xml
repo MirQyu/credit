@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qyu.shanda.dao.PublishCourseDAO">
+    <sql id="course">course</sql>
+    <sql id="publish_course">publish_course</sql>
+    <sql id="selectField_course">id</sql>
+    <sql id="selectFields">id, course_id, tea_id, exp_num, real_num</sql>
+
+    <select id="selectAllPublishCourseByCollegeId" resultType="qyu.shanda.model.Publish_Course">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="publish_course"/>
+
+        WHERE course_id in
+        (
+          SELECT id FROM course WHERE course.college_id = #{college_id}
+        )
+        ORDER BY id DESC
+        LIMIT #{offset},#{limit}
+    </select>
+</mapper>

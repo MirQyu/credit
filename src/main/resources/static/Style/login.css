@@ -1,0 +1,42 @@
+.form-horizontal{
+    background: #fff;
+    padding-bottom: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: #227AD7;
+}
+.form-horizontal span{
+    display: block;
+    font-size: 35px;
+    font-weight: 700;
+    padding: 35px 0;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 30px;
+}
+.form-horizontal .input-form{
+    padding: 0 35%;
+    margin: 0 0 10px 0;
+    position: relative;
+}
+
+.form-horizontal input{
+    /*border: 0;*/
+    /*border-bottom: #000000 1px solid;*/
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.form-horizontal button{
+    float: none;
+    font-size: 18px;
+    /*color: #fff;*/
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 8px 15px;
+    border: none;
+    color: #227AD7;
+    /*text-transform: capitalize;*/
+    /*transition: width 0.5s*/
+}
+
