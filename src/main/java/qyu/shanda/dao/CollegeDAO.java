@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import qyu.shanda.model.College;
 
+import java.util.List;
+
 /**
  * Created by MirQ on 17/9/24.
  */
@@ -22,4 +24,6 @@ public interface CollegeDAO {
     College selectById(int id);
 
 
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME})
+    List<College> selectAllCollege();
 }

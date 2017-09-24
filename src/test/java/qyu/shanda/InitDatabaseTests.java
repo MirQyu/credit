@@ -2,10 +2,13 @@ package qyu.shanda;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+import qyu.shanda.controller.IndexController;
 import qyu.shanda.dao.*;
 import qyu.shanda.model.*;
 
@@ -18,6 +21,9 @@ import java.util.Random;
 @SpringBootTest
 @Sql("/init-schema.sql")
 public class InitDatabaseTests {
+    private static final Logger logger =  LoggerFactory.getLogger(InitDatabaseTests.class);
+
+
     @Autowired
     StudentDAO studentDAO;
 
@@ -54,9 +60,10 @@ public class InitDatabaseTests {
             studentDAO.addStudent(student);
         }
 
-        for (int i = 0; i < 10; i++) {
+        String[] teachers = {"于津","方若云","蔡琳如", "蔡浩", "蔡伟鸿", "张承钿","熊智", "姜大志"};
+        for (int i = 0; i < teachers.length; i++) {
             Teacher teacher = new Teacher();
-            teacher.setName(String.format("STU%d", i));
+            teacher.setName(teachers[i]);
             teacher.setPassword("123456");
             teacher.setSex((i & 1) == 0);
             teacher.setAge(17 + i);
@@ -103,7 +110,8 @@ public class InitDatabaseTests {
 
 
         String[] courses = {"高等数学", "英语Level-1", "英语Level-2", "英语Level-3", "英语Level-4", "英语Level-5",
-                            "面向对象设计", "资本市场", "法语", "数据库原理", "操作系统", "计算机网络"};
+                            "面向对象设计", "资本市场", "法语", "数据库原理", "操作系统", "计算机网络", "日语", "德语", "西班牙语", "游泳课",
+                            "物理学", "化学", "生物", "电子电工", "人工智能", "C++开发", "Android开发", "地理实验", "GameOver"};
         for (String name : courses) {
             Course course = new Course();
             course.setName(name);
@@ -117,11 +125,15 @@ public class InitDatabaseTests {
         for (int i = 0; i < courses.length; i++) {
             Publish_Course publish_course = new Publish_Course();
             publish_course.setCourse_id(i+1);
-            publish_course.setTea_id(random.nextInt(10) + 1);
-            publish_course.setExp_num(50 + random.nextInt(30));
+            publish_course.setTea_id(random.nextInt(teachers.length) + 1);
+            publish_course.setExp_num(50 + random.nextInt(40));
 
-            publish_course.setReal_num(random.nextInt(80));
+            publish_course.setReal_num(random.nextInt(50));
             publishCourseDAO.addPublishCourse(publish_course);
         }
+
+//        Publish_Course publishCourse = publishCourseDAO.selectById(2);
+//        Course course = courseDAO.selectCourseById(publishCourse.getCourse_id());
+//        logger.debug("name-----------", course.getName());
     }
 }

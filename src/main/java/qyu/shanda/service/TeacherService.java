@@ -20,7 +20,7 @@ public class TeacherService {
     @Autowired
     TeacherDAO teacherDAO;
 
-    public Teacher getStudent(int id) {
+    public Teacher getTeacherById(int id) {
         return teacherDAO.selectById(id);
     }
 }

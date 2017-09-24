@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class TestController {
 
-    @RequestMapping(value = {"/profile/{groupId}/{userId}"})
+    @RequestMapping(value = {"/profile/"})
     @ResponseBody
-    public String profile(@PathVariable("groupId") String groupId,
-                          @PathVariable("userId") int userId,
+    public String profile(@RequestParam(value = "groupId", defaultValue = "0") String groupId,
+                          @RequestParam(value = "userId", defaultValue = "0") int userId,
                           @RequestParam(value = "type", defaultValue = "1") int type,
                           @RequestParam(value = "key", defaultValue = "nowcoder") String key) {
         return String.format("{%s}, {%d}, {%d}, {%s}", groupId, userId, type, key);

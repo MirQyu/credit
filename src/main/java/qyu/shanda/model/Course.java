@@ -11,6 +11,12 @@ public class Course {
     private int credit;             //学分
     private String syllabus;        //大纲
 
+    @Override
+    public String toString() {
+        return "id:" + id + " name:" + name + " college_id:" + college_id +
+                " necessary:" + necessary + " credit: " + credit + " syllabus: " + syllabus;
+    }
+
     public String getSyllabus() {
         return syllabus;
     }
@@ -36,7 +42,7 @@ public class Course {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {

@@ -9,7 +9,7 @@ CREATE TABLE `student` (
   `type` varchar(32) DEFAULT NULL,
   `head_url` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
@@ -22,7 +22,7 @@ CREATE TABLE `teacher` (
   `type` varchar(32) DEFAULT NULL,
   `head_url` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `room`;
 CREATE TABLE `room` (

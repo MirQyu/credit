@@ -1,0 +1,58 @@
+<#include "header.html" parse=true/>
+
+<div class="cztable">
+    <div class="tis red">
+        各学院列表：
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr style="height: 25px" align="center">
+            <th scope="col">
+                学院号
+            </th>
+            <th scope="col">
+                学院名
+            </th>
+            <th scope="col">
+                院长
+            </th>
+            <th scope="col">
+                详细学院课表
+            </th>
+        </tr>
+
+
+        <#list collegeList as college>
+
+            <tr align="center">
+                <td>
+                    <div class="courseID">
+                        <a href="javascript:;" onclick="open_box()">${(college.id)!"编号异常"}</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="courseName">
+                        <a href="javascript:;" onclick="alert('courseName:${(college.name)!}')">${college.name!}</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="courseQualification">
+                        <span>${college.dean_id!}</span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="Course">
+                        <a href="/courseList?college_id=${college.id!}" >详细学院开课</a>
+                    </div>
+                </td>
+            </tr>
+
+        </#list>
+
+        </tbody>
+    </table>
+</div>
+
+
+<#include "footer.html" />

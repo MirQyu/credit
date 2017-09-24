@@ -1,453 +1,103 @@
 <#include "header.html" parse=true/>
-<div class="cztable">
-    <div class="tis red">
-        注：点击右侧“添加”按钮即可选课。
+    <div class="cztable">
+        <div class="tis red">
+            注：点击右侧“添加”按钮即可选课。
+            <#if college_id == 0 >
+                全部课程
+            <#else>
+                ${college.name!}
+            </#if>
+        </div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr style="height: 25px" align="center">
+                <th scope="col">
+                    班号
+                </th>
+                <th scope="col">
+                    课程名称
+                </th>
+                <th scope="col">
+                    学分数
+                </th>
+                <th scope="col">
+                    学位数
+                </th>
+                <th scope="col">
+                    教师
+                </th>
+                <th scope="col">
+                    课室
+                </th>
+                <th scope="col">
+                    上课时间
+                </th>
+                <th scope="col">
+                    操作
+                </th>
+            </tr>
+
+
+            <#list vos as vo>
+                <#assign course=vo.get("course") />
+                <#assign publishCourse=vo.get("publishCourse") />
+                <#assign teacher=vo.get("teacher") />
+
+            <tr align="center">
+                <td>
+                    <div class="courseID">
+                        <a href="javascript:;" onclick="open_box()">${(publishCourse.id)!"编号异常"}</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="courseName">
+                        <a href="javascript:;" onclick="alert('courseName:${(course.name)!}')">${course.name!}</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="courseQualification">
+                        <span>${course.credit!}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="courseCredit">
+                        <span class="selectedNum">${(publishCourse.real_num)!}</span>
+                        /
+                        <span class="maxNum">${(publishCourse.exp_num)!}</span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="courseTeacher">
+                        <a href="javascript:;" onclick="alert('courseTeacher:${teacher.name!}')">${teacher.name!}&nbsp;</a>
+                        |
+                        <!--<a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>-->
+                    </div>
+                </td>
+
+                <td>
+                    <div class="courseClassroom">
+                        <span>E201&nbsp;</span>
+                        |
+                        <span>E408</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="courseDuration">
+                        <span>1-16周</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="deleteCourse">
+                        <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
+                    </div>
+                </td>
+            </tr>
+
+            </#list>
+
+            </tbody>
+        </table>
     </div>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tbody>
-        <tr style="height: 25px" align="center">
-            <th scope="col">
-                班号
-            </th>
-            <th scope="col">
-                课程名称
-            </th>
-            <th scope="col">
-                学分数
-            </th>
-            <th scope="col">
-                学位数
-            </th>
-            <th scope="col">
-                教师
-            </th>
-            <th scope="col">
-                课室
-            </th>
-            <th scope="col">
-                上课时间
-            </th>
-            <th scope="col">
-                操作
-            </th>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="open_box()">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="alert('courseID:88888')">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="alert('courseID:88888')">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="alert('courseID:88888')">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="alert('courseID:88888')">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="alert('courseID:88888')">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="alert('courseID:88888')">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-        <tr align="center">
-            <td>
-                <div class="courseID">
-                    <a href="javascript:;" onclick="alert('courseID:88888')">88888</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseName">
-                    <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
-                </div>
-            </td>
-            <td>
-                <div class="courseQualification">
-                    <span>2</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseCredit">
-                    <span class="selectedNum">20</span>
-                    /
-                    <span class="maxNum">25</span>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseTeacher">
-                    <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                    |
-                    <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
-                </div>
-            </td>
-
-            <td>
-                <div class="courseClassroom">
-                    <span>E201&nbsp;</span>
-                    |
-                    <span>E408</span>
-                </div>
-            </td>
-            <td>
-                <div class="courseDuration">
-                    <span>1-16周</span>
-                </div>
-            </td>
-            <td>
-                <div class="deleteCourse">
-                    <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
-                </div>
-            </td>
-        </tr>
-
-
-
-        </tbody>
-    </table>
-</div>
-
-</div>
-</div>
-</div>
 
 <#include "footer.html" />
