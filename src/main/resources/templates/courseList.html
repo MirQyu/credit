@@ -42,6 +42,9 @@
                 <#assign course=vo.get("course") />
                 <#assign publishCourse=vo.get("publishCourse") />
                 <#assign teacher=vo.get("teacher") />
+                <#assign room=vo.get("room") />
+                <#assign time=vo.get("time") />
+                <#assign mark=vo.get("mark") />
 
             <tr align="center">
                 <td>
@@ -77,14 +80,12 @@
 
                 <td>
                     <div class="courseClassroom">
-                        <span>E201&nbsp;</span>
-                        |
-                        <span>E408</span>
+                        <span>${mark!}${room.num!"教室异常"}&nbsp;</span>
                     </div>
                 </td>
                 <td>
                     <div class="courseDuration">
-                        <span>1-16周</span>
+                        <span>${time!"时间遗传"}</span>
                     </div>
                 </td>
                 <td>

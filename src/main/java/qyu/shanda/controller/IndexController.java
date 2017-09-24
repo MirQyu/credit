@@ -6,19 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import qyu.shanda.dao.CourseArrangeDAO;
-import qyu.shanda.dao.LessonTimeDAO;
-import qyu.shanda.dao.PublishCourseDAO;
 import qyu.shanda.model.*;
 import qyu.shanda.service.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by MirQ on 17/9/22.
@@ -46,7 +39,11 @@ public class IndexController {
     LessonTimeService lessonTimeService;
 
     @Autowired
-    RommService rommService;
+    RoomService roomService;
+
+    @Autowired
+    BuildingService buildingService;
+
 
     @RequestMapping(path = {"/", "/index"})
     public String index() {
@@ -112,17 +109,39 @@ public class IndexController {
 
                 List<Course_Arrange> courseArrangeList = courseService.getByPublishCourseId(publishCourse.getId());
                 Room room = null;
-                List<String> timeList = new ArrayList<>();
+                String[] timeList = new String[6];
                 for (Course_Arrange courseArrange : courseArrangeList) {
                     if (room == null) {
-                        room = rommService.getRoomById(courseArrange.getRoom_id());
+                        room = roomService.getRoomById(courseArrange.getRoom_id());
                     }
+
+                    logger.info(courseArrange.getLesson_time_id() + "------");
                     Lesson_Time lessonTime = lessonTimeService.getLessonTimeById(courseArrange.getLesson_time_id());
-                    timeList.add(lessonTime.getTime());
+                    int day = courseArrange.getDay();
+                    if (timeList[day] == null) {
+                        timeList[day] = "";
+                    }
+                    timeList[day] += lessonTime.getTime();
                 }
 
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 1; i < timeList.length; i++) {
+                    if (timeList[i] == null) {
+                        continue;
+                    }
+                    sb.append("星期");
+                    sb.append(i);
+                    sb.append(": ");
+                    sb.append(timeList[i]);
+                    sb.append("\t");
+                }
+
+                Building building = buildingService.getBuildingById(room.getBuilding_id());
+
                 vo.set("room", room);
-                vo.set("timeList", timeList);
+                vo.set("time", sb.toString());
+                vo.set("mark", building.getMark());
                 vos.add(vo);
             }
         }

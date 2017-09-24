@@ -54,7 +54,7 @@ public class StudentService {
         student = new Student();
         student.setName(name);
         student.setPassword(password);
-        student.setSex(true);
+        student.setSex(random.nextBoolean());
         student.setAge(18);
         student.setYear(2017);
         student.setType("0");

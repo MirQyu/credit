@@ -9,7 +9,7 @@ import qyu.shanda.model.Room;
  * Created by MirQ on 17/9/24.
  */
 @Service
-public class RommService {
+public class RoomService {
 
     @Autowired
     RoomDAO roomDAO;

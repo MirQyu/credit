@@ -84,7 +84,7 @@ public class InitDatabaseTests {
 
         //LessonTime
         String[] time = {"1","2","3","4","5","6","7","8","9","0","A","B","C"};
-        for (int i = 1; i < time.length; i++) {
+        for (int i = 0; i < time.length; i++) {
             Lesson_Time lessonTime = new Lesson_Time();
 
             lessonTime.setTime(time[i]);
@@ -158,6 +158,8 @@ public class InitDatabaseTests {
             Publish_Course publishCourse = publishCourseDAO.selectById(i+1);
             Course course = courseDAO.selectCourseById(publishCourse.getCourse_id());
             int size = build.length * 15; // 60
+            boolean isArrange = false;
+
             for (int j = 0; j < size; j++) {
                 Room room = roomDAO.selectById(j+1);
                 if (room.getCapacity() < publishCourse.getExp_num()) {
@@ -202,13 +204,18 @@ public class InitDatabaseTests {
                         credit--;
 
                         if (credit == 0) {
+                            isArrange = true;
                             break;
                         }
                     }
 
-                    if (credit == 0) {
+                    if (isArrange) {
                         break;
                     }
+                }
+
+                if (isArrange) {
+                    break;
                 }
             }
         }
