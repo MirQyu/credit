@@ -3,8 +3,13 @@
 <div class="content">
 <div class="container">
 <h3 class="page-header">${(student.name)!"未登录访客"}</h3>
-<a class="quit" href="/logout">退出</a>
-
+<h5>
+  <#if student??>
+    <a class="quit" href="/logout">退出</a>
+  <#else>
+    <a class="quit" href="/reglogin">登陆</a>
+  </#if>
+</h5>
   <div class="">
     <div class="row-fluid">
       <div class="col-md-2" style="padding-left: 0px;">
