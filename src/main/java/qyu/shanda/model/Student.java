@@ -15,6 +15,15 @@ public class Student {
     private int year;
     private String head_url;
     private String type;
+    private int college_id;
+
+    public int getCollege_id() {
+        return college_id;
+    }
+
+    public void setCollege_id(int college_id) {
+        this.college_id = college_id;
+    }
 
     public String getHead_url() {
         return head_url;

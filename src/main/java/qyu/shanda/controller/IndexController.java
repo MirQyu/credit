@@ -6,18 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import qyu.shanda.dao.CourseArrangeDAO;
+import qyu.shanda.dao.LessonTimeDAO;
 import qyu.shanda.dao.PublishCourseDAO;
 import qyu.shanda.model.*;
-import qyu.shanda.service.CollegeService;
-import qyu.shanda.service.CourseService;
-import qyu.shanda.service.PublishCourseService;
-import qyu.shanda.service.TeacherService;
+import qyu.shanda.service.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by MirQ on 17/9/22.
@@ -38,14 +39,33 @@ public class IndexController {
     @Autowired
     CollegeService collegeService;
 
-    @RequestMapping(path = {"/index"})
-    public String index() {
+    @Autowired
+    HostHolder hostHolder;
 
+    @Autowired
+    LessonTimeService lessonTimeService;
+
+    @Autowired
+    RommService rommService;
+
+    @RequestMapping(path = {"/", "/index"})
+    public String index() {
         return "index";
     }
 
     @RequestMapping(path = {"/myCourse"})
-    public String myCourse() {
+    public String myCourse(Model model) {
+        if (hostHolder.getStudent() != null) {
+            List<ViewObject> vos = new ArrayList<>();
+            List<Publish_Course> publishCourseList = courseService.getAllCourseByStudentId(hostHolder.getStudent().getId());
+            if (publishCourseList != null) {
+                generateViewList(publishCourseList, vos);
+                model.addAttribute("vos", vos);
+            }
+
+        }
+
+
         return "myCourse";
     }
 
@@ -66,8 +86,17 @@ public class IndexController {
         }
 
         List<ViewObject> vos = new ArrayList<>();
+        generateViewList(publishCourseList, vos);
+        model.addAttribute("vos", vos);
+        model.addAttribute("college_id", college_id);
+
+        return "courseList";
+    }
+
+    private void generateViewList(List<Publish_Course> publishCourseList, List<ViewObject> vos) {
         if (publishCourseList != null) {
             for (Publish_Course publishCourse : publishCourseList) {
+                // 传给模板的视图对象， 聚集相关内容
                 ViewObject vo = new ViewObject();
                 vo.set("publishCourse", publishCourse);
 
@@ -80,13 +109,23 @@ public class IndexController {
 
                 Teacher teacher = teacherService.getTeacherById(publishCourse.getTea_id());
                 vo.set("teacher", teacher);
+
+                List<Course_Arrange> courseArrangeList = courseService.getByPublishCourseId(publishCourse.getId());
+                Room room = null;
+                List<String> timeList = new ArrayList<>();
+                for (Course_Arrange courseArrange : courseArrangeList) {
+                    if (room == null) {
+                        room = rommService.getRoomById(courseArrange.getRoom_id());
+                    }
+                    Lesson_Time lessonTime = lessonTimeService.getLessonTimeById(courseArrange.getLesson_time_id());
+                    timeList.add(lessonTime.getTime());
+                }
+
+                vo.set("room", room);
+                vo.set("timeList", timeList);
                 vos.add(vo);
             }
         }
-        model.addAttribute("vos", vos);
-        model.addAttribute("college_id", college_id);
-
-        return "courseList";
     }
 
 
@@ -101,10 +140,5 @@ public class IndexController {
     @RequestMapping(path = {"/userInfo"})
     public String userInfo() {
         return "userInfo";
-    }
-
-    @RequestMapping(path = {"/login"})
-    public String login() {
-        return "login";
     }
 }

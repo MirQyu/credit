@@ -1,6 +1,8 @@
 package qyu.shanda.controller;
 
+import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -34,5 +36,10 @@ public class TestController {
         response.addHeader(key, value);
 
         return "NowCoderID from cookie:" + nowcoderID;
+    }
+
+    @RequestMapping(value = {"/test"})
+    public String test(Model model) {
+        return "hhhh";
     }
 }

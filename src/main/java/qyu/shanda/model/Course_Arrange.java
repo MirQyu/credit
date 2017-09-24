@@ -9,7 +9,7 @@ public class Course_Arrange {
     private int id;
     private int room_id;
     private int pub_course_id;
-    private int day;        // 周几 被选了 [1...6,0]
+    private int day;        // 周几 被选了 [1...5]
     private int lesson_time_id; //一天中的那个时间段 被选了
 
     public int getId() {

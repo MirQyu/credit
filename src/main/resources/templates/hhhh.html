@@ -5,6 +5,20 @@
     <title>Title</title>
 </head>
 <body>
+<!--${(student.id)!}-->
+<#assign stu="good" />
+<#if s??>
+    <p>存在S</p>
+
+    <#if stu??>
+        <p>存在stu</p>
+    <#else>
+        <p>不存在stu</p>
+    </#if>
+
+<#else>
+    <p>不存在S</p>
+</#if>
 <h1>哈哈哈哈哈哈哈哈哈</h1>
 </body>
 </html>

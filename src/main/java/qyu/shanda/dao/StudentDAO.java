@@ -10,15 +10,18 @@ import qyu.shanda.model.Student;
 @Mapper
 public interface StudentDAO {
     String TABLE_NAME = " student ";
-    String INSERT_FIELDS = " name, password, sex, age, year, type, head_url";
+    String INSERT_FIELDS = " name, password, sex, age, year, type, head_url, college_id ";
     String SELECT_FIELDS = " id, " + INSERT_FIELDS;
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
-             ") values (#{name},#{password},#{sex},#{age},#{year},#{type},#{head_url})"})
+             ") values (#{name},#{password},#{sex},#{age},#{year},#{type},#{head_url},#{college_id})"})
     int addStudent(Student student);
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where id=#{id}"})
     Student selectById(int id);
+
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where name=#{name}"})
+    Student selectByName(String name);
 
 //    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where name=#{name}"})
 //    Student selectByName(String name);

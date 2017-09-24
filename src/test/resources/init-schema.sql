@@ -8,6 +8,7 @@ CREATE TABLE `student` (
   `year` int(11) DEFAULT NULL,
   `type` varchar(32) DEFAULT NULL,
   `head_url` varchar(256) DEFAULT NULL,
+  `college_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -93,4 +94,15 @@ CREATE TABLE `college` (
   `name` varchar(128) DEFAULT NULL,
   `dean_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `login_ticket`;
+CREATE TABLE `login_ticket` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_id` int(11) NOT NULL,
+  `ticket` varchar(45) NOT NULL,
+  `expired` datetime NOT NULL,
+  `status` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ticket_UNIQUE` (`ticket`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
