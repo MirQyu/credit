@@ -32,18 +32,26 @@ public class CourseService {
     @Autowired
     CourseArrangeDAO courseArrangeDAO;
 
-    public List<Publish_Course> getAllCourseByStudentId(int stu_id) {
+    public int addChooseCourse(Choose_Course chooseCourse) {
+        return chooseCourseDAO.addChooseCourse(chooseCourse);
+    }
+
+    public List<Choose_Course> getChooseCourseByStuId(int stu_id) {
+        return chooseCourseDAO.getAllChooseCourseByStudentId(stu_id);
+    }
+
+    public List<Publish_Course> getAllChoosePublishCourseByStudentId(int stu_id) {
         List<Choose_Course> choose_courses =  chooseCourseDAO.getAllChooseCourseByStudentId(stu_id);
         List<Publish_Course> res = new ArrayList<>();
-        for (Choose_Course cc : choose_courses) {
-            Publish_Course publish_course = publishCourseDAO.selectById(cc.getPub_course_id());
+        for (Choose_Course chooseCourse : choose_courses) {
+            Publish_Course publish_course = publishCourseDAO.selectById(chooseCourse.getPub_course_id());
             res.add(publish_course);
         }
 
         return res;
     }
 
-    public List<Course_Arrange> getByPublishCourseId(int id) {
+    public List<Course_Arrange> getCourseArrangeByPublishCourseId(int id) {
         return courseArrangeDAO.selectByPublishCourseId(id);
     }
 

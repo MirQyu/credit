@@ -30,9 +30,16 @@
                 </th>
             </tr>
 
-            <#if publishCourses??>
+            <#if vos??>
 
-            <#list publishCourses as course>
+            <#list vos as vo>
+                <#assign course=vo.get("course") />
+                <#assign publishCourse=vo.get("publishCourse") />
+                <#assign teacher=vo.get("teacher") />
+                <#assign room=vo.get("room") />
+                <#assign time=vo.get("time") />
+                <#assign mark=vo.get("mark") />
+
             <tr align="center">
                 <td>
                     <div class="courseID">
@@ -41,34 +48,31 @@
                 </td>
                 <td>
                     <div class="courseName">
-                        <a href="javascript:;" onclick="alert('courseName:算法设计与分析')">算法设计与分析</a>
+                        <p >${course.name!}</p>
                     </div>
                 </td>
                 <td>
                     <div class="courseCredit">
-                        <span>2</span>
+                        <span>${course.credit!}</span>
                     </div>
                 </td>
                 <td>
                     <div class="courseTeacher">
-                        <a href="javascript:;" onclick="alert('courseTeacher:张杰')">张杰&nbsp;</a>
-                        |
-                        <a href="javascript:;" onclick="alert('courseTeacher:李新')">李新</a>
+                        <p>${teacher.name!}</p>
                     </div>
                 </td>
 
                 <td>
                     <div class="courseClassroom">
-                        <span>E201&nbsp;</span>
-                        |
-                        <span>E408</span>
+                        <span>${mark!}${room.num!"教室异常"}&nbsp;</span>
                     </div>
                 </td>
                 <td>
                     <div class="courseDuration">
-                        <span>1-16周</span>
+                        <span>${time!"时间异常"}</span>
                     </div>
                 </td>
+
                 <td>
                     <div class="deleteCourse">
                         <a href="javascript:;" onclick="alert('无法删除！hhh')">删除</a>

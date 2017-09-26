@@ -85,12 +85,17 @@
                 </td>
                 <td>
                     <div class="courseDuration">
-                        <span>${time!"时间遗传"}</span>
+                        <span>${time!"时间异常"}</span>
                     </div>
                 </td>
                 <td>
                     <div class="deleteCourse">
-                        <a href="javascript:;" onclick="alert('无法添加！hhh')">添加</a>
+                        <#if student??>
+                            <a href="/addCourse?publishCourseId=${publishCourse.id!}" >添加</a>
+                        <#else>
+                            <p>未登录</p>
+                        </#if>
+
                     </div>
                 </td>
             </tr>

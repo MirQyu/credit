@@ -54,7 +54,14 @@ public class MyTests {
     @Test
     public void test() {
 
-        List<Course_Arrange> list = courseArrangeDAO.selectByPublishCourseId(1);
+        //List<Course_Arrange> list = courseArrangeDAO.selectByPublishCourseId(1);
+
+        Set<Integer> set  = new HashSet<>();
+        set.add(1);
+        set.add(2);
+        if (set.contains(2)) {
+            logger.info("hahahaha");
+        }
 
         //Assert.assertNull(list);
 
